@@ -50,6 +50,11 @@ int main(){
       // committing changes
       case 3: {
        // traverse the entire SLL
+             // check if file version already exists in minigit 
+                  // No -> copy file from current directory into minigit, new file name should be from node's fileVersion member
+                  // Yes -> check if current directory file has been changed
+                       // if file is unchanged, do nothing
+                       // if file is changed, copy file from current directory to minigit and assign name with version number, update SLL node name to version number
         // declare any necessary functions
         break;
       }
@@ -60,10 +65,16 @@ int main(){
         break;
       }
       
+      // quit the menu
       case 5: {
         cout << "Quitting..." << endl;
         break;
       }
+      
+      // invalid input
+      default:
+       cout << "Invalid Input" << endl;
+       break;
 
     }
   }
