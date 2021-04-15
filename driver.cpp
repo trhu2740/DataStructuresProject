@@ -33,7 +33,7 @@ int main(){
        // add conditionals to see if file name already exists
        // if file name exists, ask user to provide a valid name
        // remember: same name cannot be added twice
-        // add test cases and declare functions
+        // declare any necessary functions
         break;
       }
 
@@ -43,20 +43,20 @@ int main(){
        cout << "Enter a file name: " << endl;
        cin >> fileName;
        // check if file exists, then delete the SLL node
-        // add test cases and declare functions
+        // declare any necessary functions
         break;
       }
 
       // committing changes
       case 3: {
        // traverse the entire SLL
-        // add test cases and declare functions
+        // declare any necessary functions
         break;
       }
 
       // checking out a specific version based on a unique commit number
       case 4: {
-        // add test cases and declare functions
+        // declare any necessary functions
         break;
       }
       
