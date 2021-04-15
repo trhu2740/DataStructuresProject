@@ -13,3 +13,24 @@
 #include <vector>
 
 using namespace std;
+
+struct doublyNode
+{
+  int commitNumber;
+  singlyNode * head;
+  doublyNode * previous;
+  doublyNode * next;
+};
+
+struct singlyNode
+{
+  std::string fileName;
+  std::string fileVersion; 
+  singlyNode * next;
+};
+
+class Git 
+{
+  
+}
+
