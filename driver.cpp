@@ -25,6 +25,7 @@ int main(){
     menu();
     
     switch(option) {
+      // adding a file
       case 1: {
        string fileName;
        cout << "Enter a file name: " << endl;
@@ -36,6 +37,7 @@ int main(){
         break;
       }
 
+      // removing files
       case 2: {
        string fileName;
        cout << "Enter a file name: " << endl;
@@ -45,12 +47,14 @@ int main(){
         break;
       }
 
+      // committing changes
       case 3: {
        // traverse the entire SLL
         // add test cases and declare functions
         break;
       }
 
+      // checking out a specific version based on a unique commit number
       case 4: {
         // add test cases and declare functions
         break;
