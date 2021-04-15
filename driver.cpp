@@ -16,13 +16,13 @@
 using namespace std;
 
 
-void displayMenu();
+void menu();
 
 int main(){
  int option = 0;
   // declare strings as needed
   while(option != 5) {
-    displayMenu();
+    menu();
     
     switch(option) {
       case 1: {
@@ -69,7 +69,7 @@ int main(){
 }
 
 
-void displayMenu() {
+void menu() {
   cout << "What would you like to do? Select a numerical option." << endl;
   cout << "1. Add files to the current commit" << endl;
   cout << "2. Remove files from the current commit" << endl;
