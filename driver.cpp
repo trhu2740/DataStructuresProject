@@ -26,16 +26,27 @@ int main(){
     
     switch(option) {
       case 1: {
+       string fileName;
+       cout << "Enter a file name: " << endl;
+       cin >> fileName;
+       // add conditionals to see if file name already exists
+       // if file name exists, ask user to provide a valid name
+       // remember: same name cannot be added twice
         // add test cases and declare functions
         break;
       }
 
       case 2: {
+       string fileName;
+       cout << "Enter a file name: " << endl;
+       cin >> fileName;
+       // check if file exists, then delete the SLL node
         // add test cases and declare functions
         break;
       }
 
       case 3: {
+       // traverse the entire SLL
         // add test cases and declare functions
         break;
       }
