@@ -32,5 +32,5 @@ struct singlyNode
 class Git 
 {
   
-}
+};
 
