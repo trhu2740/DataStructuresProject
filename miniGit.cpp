@@ -11,5 +11,6 @@
 #include <cmath>
 #include <cstdlib>
 #include <vector>
+#include "miniGit.hpp"
 
 using namespace std;
