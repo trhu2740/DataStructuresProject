@@ -76,6 +76,7 @@ int main(){
             if(yesNo == 'Y') {
               // declare any necessary functions
              // search DLL for a node with matching commit number
+             break;
             } else {
              // DON'T PERFORM FUNCTION
              break;
