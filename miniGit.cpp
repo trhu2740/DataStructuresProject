@@ -16,9 +16,9 @@
 using namespace std;
 
     // i am thinking we run this function in the main to see if the file exists alreay then we run the addFile function if the file does not exist in the directory
-    bool Git::checkFile(Node* head, string fileName)
+    bool Git::checkFile(singlyNode* head, string fileName)
     {
-        Node* current = head;  
+        singlyNode* current = head;  
         while (current != NULL) 
         { 
             if (current->key == fileName)
