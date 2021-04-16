@@ -14,3 +14,18 @@
 #include "miniGit.hpp"
 
 using namespace std;
+
+    void Git::addFile(){
+        
+
+    }
+    void Git::removeFile(){
+
+    }
+    void Git::commitChanges(){
+
+    }
+    void Git::checkOut(){
+
+    }
+  

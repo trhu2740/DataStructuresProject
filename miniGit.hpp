@@ -14,19 +14,19 @@
 
 using namespace std;
 
+struct singlyNode
+{
+  std::string fileName; //local file
+  std::string fileVersion; //name of file in .minigit folder
+  singlyNode * next;
+};
+
 struct doublyNode
 {
   int commitNumber;
   singlyNode * head;
   doublyNode * previous;
   doublyNode * next;
-};
-
-struct singlyNode
-{
-  std::string fileName;
-  std::string fileVersion; 
-  singlyNode * next;
 };
 
 class Git 
@@ -36,8 +36,10 @@ class Git
     void removeFile();
     void commitChanges();
     void checkOut();
+    doublyNode * starterNode; //this is our access to the starterNode, I'm not sure if this needs to be changed but seems to work in the driver
   
   private: 
+  //doublyNode * starterNode;
   
 };
 

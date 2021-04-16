@@ -19,6 +19,34 @@ using namespace std;
 void menu();
 
 int main(){
+Git testGit; //test git 
+//doublyNode starterNode;
+//First, we want to prompt the user to initialize a new repository.
+char initialize; //char for below
+cout << "Would you like to initialize a new repository? (Y/N) -- Pick Yes" << endl;
+cin >> initialize;
+if (initialize == 'Y' || 'y'){ //add a new "blank" doubly node to begin our list
+    testGit.starterNode->commitNumber = 0;
+    testGit.starterNode->head = NULL; //this is the head of the singly linked list
+    testGit.starterNode->next = NULL; //pointer to the next node in doubly linked list (next commit)
+    testGit.starterNode->previous = NULL; //pointer to previous node in doubly linked list (this is the first node, so this will always be NULL for this node)
+}
+else{ //create anyways or quit program..?
+    testGit.starterNode->commitNumber = 0;
+    testGit.starterNode->head = NULL; //this is the head of the singly linked list
+    testGit.starterNode->next = NULL; //pointer to the next node in doubly linked list (next commit)
+    testGit.starterNode->previous = NULL; //pointer to previous node in doubly linked list (this is the first node, so this will always be NULL for this node)
+
+}
+cout << "A new repository has been created." << endl;
+cout << "---Current commit number: " << testGit.starterNode->commitNumber << endl;
+cout << "---Current path of singly linked list attached to StarterNode: " << testGit.starterNode->head << " (NULL)"<< endl;
+cout << "---StarterNode's next node: " << testGit.starterNode->next << " (NULL)" << endl;
+cout << "---StarterNode's previous node: " << testGit.starterNode->previous << " (NULL)" << endl;
+doublyNode * secondNode = new doublyNode; //this is the process of creating a new doubly node after a commit, then we can assign this into the doubly list from the access of the starter node
+
+/* ---------- Below is everything involved with our menu, above is initializing our new repository ---------- */
+
  int option = 0;
   // declare strings as needed
   while(option != 5) {
