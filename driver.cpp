@@ -64,7 +64,21 @@ int main(){
 
       // checking out a specific version based on a unique commit number
       case 4: {
-        // declare any necessary functions
+       int commitNumber;
+       cout << "Enter a commit number: " << endl;
+       cin >> commitNumber;
+       // if commit number = valid, then files should be overwritten by corresponding files in minigit
+            string yesNo;
+            cout << "Warning: You will lose your local changes if you check out from a different version before making a commit with your current local changes." << endl;
+            cout << "Do you still want to do this? (Y/N)" << endl;
+             cin >> yesNo;
+            if(yesNo = 'Y' || 'y') {
+              // declare any necessary functions
+             // search DLL for a node with matching commit number
+            } else {
+             break;
+            }
+       
         break;
       }
       
@@ -76,7 +90,7 @@ int main(){
       
       // invalid input
       default:
-       cout << "Invalid Input" << endl;
+       cout << "Invalid Input :(" << endl;
        break;
 
     }
