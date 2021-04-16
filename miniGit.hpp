@@ -32,8 +32,8 @@ struct doublyNode
 class Git 
 {
   public: 
-    void addFile();
-    void removeFile();
+    void addFile(string filename);
+    void removeFile(string filename);
     void commitChanges();
     void checkOut();
     doublyNode * starterNode; //this is our access to the starterNode, I'm not sure if this needs to be changed but seems to work in the driver

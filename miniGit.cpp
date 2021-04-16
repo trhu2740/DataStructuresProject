@@ -15,11 +15,12 @@
 
 using namespace std;
 
-    void Git::addFile(){
-        
+    void Git::addFile(string filename){
+        // singlyNode * temp = new singlyNode;
+        // temp->fileName = filename;
 
     }
-    void Git::removeFile(){
+    void Git::removeFile(string filename){
 
     }
     void Git::commitChanges(){
