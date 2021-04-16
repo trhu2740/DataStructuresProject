@@ -68,7 +68,7 @@ int main(){
        cout << "Enter a commit number: " << endl;
        cin >> commitNumber;
        // if commit number = valid, then files should be overwritten by corresponding files in minigit
-            string yesNo;
+            char yesNo;
             cout << "Warning: You will lose your local changes if you check out from a different version before making a commit with your current local changes." << endl;
             cout << "Do you still want to do this? (Y/N)" << endl;
              cin >> yesNo;
