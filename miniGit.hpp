@@ -31,9 +31,13 @@ struct singlyNode
 
 class Git 
 {
-  void addFile();
-  void removeFile();
-  void commitChanges();
-  void checkOut();
+  public: 
+    void addFile();
+    void removeFile();
+    void commitChanges();
+    void checkOut();
+  
+  private: 
+  
 };
 
