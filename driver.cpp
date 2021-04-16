@@ -23,6 +23,7 @@ int main(){
   // declare strings as needed
   while(option != 5) {
     menu();
+   cin >> option;
     
     switch(option) {
       // adding a file
