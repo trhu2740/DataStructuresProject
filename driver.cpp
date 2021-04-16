@@ -72,10 +72,11 @@ int main(){
             cout << "Warning: You will lose your local changes if you check out from a different version before making a commit with your current local changes." << endl;
             cout << "Do you still want to do this? (Y/N)" << endl;
              cin >> yesNo;
-            if(yesNo = 'Y' || 'y') {
+            if(yesNo == 'Y' || yesNo == 'y') {
               // declare any necessary functions
              // search DLL for a node with matching commit number
             } else {
+             // DON'T PERFORM FUNCTION
              break;
             }
        
