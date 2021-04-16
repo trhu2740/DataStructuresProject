@@ -60,6 +60,10 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
        cout << "Enter a file name: " << endl;
        cin >> fileName;
        // add conditionals to see if file name already exists
+          if (checkFile(starterNode, fileName) == true)
+          {
+              
+          }
        // if file name exists, ask user to provide a valid name
        // remember: same name cannot be added twice
         // declare any necessary functions
