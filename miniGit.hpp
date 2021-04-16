@@ -32,6 +32,7 @@ struct doublyNode
 class Git 
 {
   public: 
+    bool checkFile(singlyNode* next, string fileName);
     void addFile(string filename);
     void removeFile(string filename);
     void commitChanges();
