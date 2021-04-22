@@ -15,6 +15,7 @@
 #include "miniGit.cpp"
 
 using namespace std;
+namespace fs = std::filesystem;
 
 
 void menu();
