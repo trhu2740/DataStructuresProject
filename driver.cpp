@@ -142,5 +142,6 @@ void menu() {
   cout << "2. Remove files from the current commit" << endl;
   cout << "3. Commit changes" << endl;
   cout << "4. Check out a specific version based on a unique commit number" << endl;
+    // add extra print statements if we decide to do extra credit - follow up
   cout << "5. Quit" << endl;
 }
