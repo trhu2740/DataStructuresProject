@@ -42,6 +42,11 @@ using namespace std;
 
         cout <<"-----addFile function executed.-----" << endl; //just a debug statement to make sure this function was run
     }
+
+    /*
+        For our removeFile function, we are only concerned with removing the file from our singly linked list.
+        Traversals to check if the file actually exists are in the driver function.
+    */
     void Git::removeFile(string filename){
         singlyNode * traverser;
         singlyNode * prevNode;
