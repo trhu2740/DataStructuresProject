@@ -139,21 +139,6 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
               cout << endl;
               cout << "filename is new. Adding to the SLL..." << endl;
               testGit.addFile(fileName);
-              //add file to minigit directory
-                char character;
-                
-                string newFile = fileName; //newFile being copied to minigit
-                //Removes the ".txt" at the end of the newFile being created
-                newFile.erase(newFile.end()-1);
-                newFile.erase(newFile.end()-1);
-                newFile.erase(newFile.end()-1);
-                newFile.erase(newFile.end()-1);
-
-                //Add version number to newFile
-                newFile = newFile + "_00.txt"; //should always start as version zero i think
-                cout <<"new file name with version number being copied to minigit ------ " << newFile;
-
-                //need to still actually copy the file over to the directory
                 
             }
             //Below prints the singly linked list after a node is added
@@ -291,3 +276,20 @@ void menu() {
   cout << "5. Quit" << endl;
 }
 
+/*
+//add file to minigit directory
+                char character;
+                
+                string newFile = fileName; //newFile being copied to minigit
+                //Removes the ".txt" at the end of the newFile being created
+                newFile.erase(newFile.end()-1);
+                newFile.erase(newFile.end()-1);
+                newFile.erase(newFile.end()-1);
+                newFile.erase(newFile.end()-1);
+
+                //Add version number to newFile
+                newFile = newFile + "_00.txt"; //should always start as version zero i think
+                cout <<"new file name with version number being copied to minigit ------ " << newFile;
+
+                //need to still actually copy the file over to the directory
+*/
