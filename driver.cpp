@@ -90,10 +90,15 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
 
 
        // add conditionals to see if file name already exists
+      // cout << "step debug one" << endl;
       singlyNode * traverser; //traverser node to check if filename already exists
       traverser = testGit.starterNode->head; //set to head of SLL
       bool found = false; //boolean for if file is found or not
-        while (traverser != NULL){
+
+      //Below while loop traverses the singly linked list checking to see if the file already exists
+        while (traverser != nullptr){
+          // cout << "step debug 1.5" << endl;
+          // cout << "first while loop files::: " << traverser->fileName << endl;
           // if (traverser != NULL){
           //   cout << "(debug --- Before execution head file): " << traverser->fileName << endl;
           // }
@@ -102,11 +107,17 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
             found = true;
             break;
           }
-          else{
-            traverser = testGit.starterNode->head->next;
+            // if (traverser->next->fileName == fileName){
+            //   found = true;
+            //   break;
+            // }
+            // if (traverser->next == nullptr){
+            //   break;
+            // }
+            traverser = traverser->next;
             //bool found = false;
-          }
         }
+        //cout << "step debug two" << endl;
             if (found == true){ //a file with the same name has been found
               cout << endl;
               cout << "--Filename already exists in list,  a file by the same name cannot be added twice. Returning to menu.--" << endl;
@@ -118,6 +129,7 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
               cout << "filename is new. Adding to the SLL..." << endl;
               testGit.addFile(fileName);
             }
+            //Below prints the singly linked list after a node is added
                 if (testGit.starterNode->head != NULL){
                   singlyNode * theCoutTraverser = testGit.starterNode->head;
                   cout << endl;
@@ -126,6 +138,7 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
                       cout << theCoutTraverser->fileName << " --> ";
                       theCoutTraverser = theCoutTraverser->next;
                     }
+                    cout << "NULL";
                     cout << endl;
                 }
                 else{
@@ -185,10 +198,10 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
       
       // quit the menu
       case 5: {
-        cout << "Quitting..." << endl;
+        cout << "Quitting and closing directory..." << endl;
         break;
       }
-      
+
       // invalid input
       default:
        cout << "Invalid Input :(" << endl;

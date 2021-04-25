@@ -1,0 +1,7 @@
+This is test file number four.
+This whole file will end up being copied to the .minigit directory
+That is created when the program runs.
+
+-- number four
+-- number four
+-- number four
