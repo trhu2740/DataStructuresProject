@@ -27,6 +27,17 @@ namespace fs = std::filesystem;
 ------------------------------------------------------------
 */ 
 
+/*
+
+  Terminal Process for adding to gitHub:
+
+    1) Check git status using git status
+      - add all files that were changed using git add (filename)
+    2) Commit files to the git using Git commit -m "Insert comments here"
+    3) Git push -u origin main
+
+*/
+
 
 void menu();
 
