@@ -43,7 +43,35 @@ using namespace std;
         cout <<"-----addFile function executed.-----" << endl; //just a debug statement to make sure this function was run
     }
     void Git::removeFile(string filename){
+        singlyNode * traverser;
+        singlyNode * prevNode;
+        traverser = starterNode->head;
+        prevNode = starterNode->head;
 
+        if (starterNode->head->fileName == filename){ //if the node to be deleted is the head node
+            if (starterNode->head->next == nullptr){
+                delete starterNode->head;
+                
+            }
+            else{
+                prevNode = starterNode->head;
+                traverser = traverser->next;
+                delete prevNode;
+                starterNode->head = traverser;
+            }
+        }
+        else{ //the node to be deleted is not the head node
+            while (traverser->fileName != filename){
+                traverser = traverser->next;
+            }
+            while (prevNode->next->fileName != filename){
+                prevNode = prevNode->next;
+            }
+            prevNode->next = prevNode->next->next;
+            delete traverser;
+        }
+
+        cout << "-----removeFile function executed.-----" << endl;
     }
     void Git::commitChanges(){
 

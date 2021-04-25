@@ -139,6 +139,22 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
               cout << endl;
               cout << "filename is new. Adding to the SLL..." << endl;
               testGit.addFile(fileName);
+              //add file to minigit directory
+                char character;
+                
+                string newFile = fileName; //newFile being copied to minigit
+                //Removes the ".txt" at the end of the newFile being created
+                newFile.erase(newFile.end()-1);
+                newFile.erase(newFile.end()-1);
+                newFile.erase(newFile.end()-1);
+                newFile.erase(newFile.end()-1);
+
+                //Add version number to newFile
+                newFile = newFile + "_00.txt"; //should always start as version zero i think
+                cout <<"new file name with version number being copied to minigit ------ " << newFile;
+
+                //need to still actually copy the file over to the directory
+                
             }
             //Below prints the singly linked list after a node is added
                 if (testGit.starterNode->head != NULL){
@@ -162,11 +178,49 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
 
       // removing files
       case 2: {
+        //take user input
        string fileName;
        cout << "Enter a file name: " << endl;
        cin >> fileName;
-       // check if file exists, then delete the SLL node
-        // declare any necessary functions
+       //create our node to traverse the linked list and find (or not find) the given filename
+       singlyNode * traverser;
+       traverser = testGit.starterNode->head;
+       bool found = false;
+       while (traverser != nullptr){
+         if (traverser->fileName == fileName){
+           found = true;
+           break;
+         }
+         traverser = traverser->next;
+       }
+       //if we find the file, we remove it
+       if (found == true){
+         cout << endl;
+         cout << "Found the file to be removed" << endl;
+         cout << endl;
+         testGit.removeFile(fileName);
+       }
+       //otherwise we exit to menu since the filename doesn't exist
+       else{
+         cout << "The filename does not exist in the singly linked list. Returning to menu." << endl;
+         break;
+       }
+              //here is the cout statements as a visual to check that the nodes are actually being deleted
+               if (testGit.starterNode->head != NULL){
+                  singlyNode * theCoutTraverser = testGit.starterNode->head;
+                  cout << endl;
+                  cout << "SLL --> ";
+                    while (theCoutTraverser != nullptr){
+                      cout << theCoutTraverser->fileName << " --> ";
+                      theCoutTraverser = theCoutTraverser->next;
+                    }
+                    cout << "NULL";
+                    cout << endl;
+                }
+                else{
+                  cout << "singly linked list head is still NULL" << endl;
+                }
+        cout << endl;
         break;
       }
 
