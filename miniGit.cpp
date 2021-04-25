@@ -15,25 +15,27 @@
 
 using namespace std;
 
-    // i am thinking we run this function in the main to see if the file exists alreay then we run the addFile function if the file does not exist in the directory
-    bool Git::checkFile(singlyNode* head, string fileName)
-    {
-        singlyNode* current = head;  
-        while (current != NULL) 
-        { 
-            if (current->key == fileName)
-            {
-                return true; 
-            }
-            current = current->next; 
-        } 
-        return false; 
-    } 
-    
     void Git::addFile(string filename){
-        // singlyNode * temp = new singlyNode;
-        // temp->fileName = filename;
+        singlyNode * temp = new singlyNode;
+        singlyNode * traverser;
+        traverser = starterNode->head;
 
+        temp->fileName = filename;
+        temp->fileVersion = "_01"; //need to increment this though just testing
+        temp->next = nullptr;
+
+        if (starterNode->head == nullptr){ //if head is null
+            starterNode->head = temp;
+        }
+        else{
+            while (traverser->next != nullptr){
+                traverser = starterNode->head->next;
+            }
+            traverser->next = temp;
+        }
+        traverser=starterNode->head;
+
+        cout <<"-----addFile function executed.-----" << endl;
     }
     void Git::removeFile(string filename){
 
@@ -44,4 +46,3 @@ using namespace std;
     void Git::checkOut(){
 
     }
-  

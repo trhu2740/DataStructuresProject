@@ -11,11 +11,21 @@
 #include <cmath>
 #include <cstdlib>
 #include <vector>
+#include "miniGit.hpp"
 #include <filesystem>
-#include "miniGit.cpp"
 
 using namespace std;
 namespace fs = std::filesystem;
+
+/* 
+------------------------------------------------------------
+
+  To execute program in terminal use the following:
+
+  g++ -std=c++17 driver.cpp miniGit.cpp
+
+------------------------------------------------------------
+*/ 
 
 
 void menu();
@@ -32,12 +42,14 @@ if (initialize == 'Y' || 'y'){ //add a new "blank" doubly node to begin our list
     testGit.starterNode->head = NULL; //this is the head of the singly linked list
     testGit.starterNode->next = NULL; //pointer to the next node in doubly linked list (next commit)
     testGit.starterNode->previous = NULL; //pointer to previous node in doubly linked list (this is the first node, so this will always be NULL for this node)
+    fs::create_directory(".minigit"); // create a new directory
 }
 else{ //create anyways or quit program..?
     testGit.starterNode->commitNumber = 0;
     testGit.starterNode->head = NULL; //this is the head of the singly linked list
     testGit.starterNode->next = NULL; //pointer to the next node in doubly linked list (next commit)
     testGit.starterNode->previous = NULL; //pointer to previous node in doubly linked list (this is the first node, so this will always be NULL for this node)
+    fs::create_directory(".minigit"); // create a new directory
 
 }
 cout << "A new repository has been created." << endl;
@@ -58,17 +70,69 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
     switch(option) {
       // adding a file
       case 1: {
-       string fileName;
-       cout << "Enter a file name: " << endl;
-       cin >> fileName;
+      string fileName;
+      cout << "Enter a file name: " << endl;
+      cin >> fileName;
+
+      //check if file exists in working directory
+      if (fs::exists(fileName)){
+        cout << endl;
+        cout << "Found file in working directory" << endl;
+        cout << endl;
+        //file exists, continue
+      }
+      else{ //file does not exist, break out to menu
+        cout << endl;
+        cout << "-----File does not exist in working directory. Returning to menu.-----" << endl;
+        cout << endl;
+        break;
+      }
+
+
        // add conditionals to see if file name already exists
-          if (checkFile(starterNode, fileName) == true)
-          {
-              
+      singlyNode * traverser; //traverser node to check if filename already exists
+      traverser = testGit.starterNode->head; //set to head of SLL
+      bool found = false; //boolean for if file is found or not
+        while (traverser != NULL){
+          // if (traverser != NULL){
+          //   cout << "(debug --- Before execution head file): " << traverser->fileName << endl;
+          // }
+          if (traverser->fileName == fileName){
+            //cout << "debug --- found a file match" << endl;
+            found = true;
+            break;
           }
-       // if file name exists, ask user to provide a valid name
-       // remember: same name cannot be added twice
-        // declare any necessary functions
+          else{
+            traverser = testGit.starterNode->head->next;
+            //bool found = false;
+          }
+        }
+            if (found == true){ //a file with the same name has been found
+              cout << endl;
+              cout << "--Filename already exists in list,  a file by the same name cannot be added twice. Returning to menu.--" << endl;
+              cout << endl;
+              break;
+            }
+            else{ //add the file
+              cout << endl;
+              cout << "filename is new. Adding to the SLL..." << endl;
+              testGit.addFile(fileName);
+            }
+                if (testGit.starterNode->head != NULL){
+                  singlyNode * theCoutTraverser = testGit.starterNode->head;
+                  cout << endl;
+                  cout << "SLL --> ";
+                    while (theCoutTraverser != nullptr){
+                      cout << theCoutTraverser->fileName << " --> ";
+                      theCoutTraverser = theCoutTraverser->next;
+                    }
+                    cout << endl;
+                }
+                else{
+                  cout << "singly linked list head is still NULL" << endl;
+                }
+        traverser = testGit.starterNode->head; //reset traverser
+        cout << endl;
         break;
       }
 
@@ -133,6 +197,8 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
     }
   }
     cout << "Goodbye :)" << endl;
+    //when we quit we will remove the minigit directory created
+    fs::remove_all(".minigit"); // removes a directory and its contents
     return 0;
 }
 
@@ -144,6 +210,6 @@ void menu() {
   cout << "2. Remove files from the current commit" << endl;
   cout << "3. Commit changes" << endl;
   cout << "4. Check out a specific version based on a unique commit number" << endl;
-    // add extra print statements if we decide to do extra credit - follow up
   cout << "5. Quit" << endl;
 }
+
