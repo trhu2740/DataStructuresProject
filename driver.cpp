@@ -42,14 +42,17 @@ namespace fs = std::filesystem;
 void menu();
 
 int main(){
+//fs::remove_all(".minigit"); // removes a directory and its contents
 Git testGit; //test git 
 //doublyNode starterNode;
 //First, we want to prompt the user to initialize a new repository.
 char initialize; //char for below
 cout << "Would you like to initialize a new repository? (Y/N) -- Pick Yes" << endl;
 cin >> initialize;
+
 if (initialize == 'Y' || 'y'){ //add a new "blank" doubly node to begin our list
     testGit.starterNode->commitNumber = 0;
+    //cout << "debug" << endl;
     testGit.starterNode->head = NULL; //this is the head of the singly linked list
     testGit.starterNode->next = NULL; //pointer to the next node in doubly linked list (next commit)
     testGit.starterNode->previous = NULL; //pointer to previous node in doubly linked list (this is the first node, so this will always be NULL for this node)
@@ -63,12 +66,12 @@ else{ //create anyways or quit program..?
     fs::create_directory(".minigit"); // create a new directory
 
 }
-cout << "A new repository has been created." << endl;
-cout << "---Current commit number: " << testGit.starterNode->commitNumber << endl;
-cout << "---Current path of singly linked list attached to StarterNode: " << testGit.starterNode->head << " (NULL)"<< endl;
-cout << "---StarterNode's next node: " << testGit.starterNode->next << " (NULL)" << endl;
-cout << "---StarterNode's previous node: " << testGit.starterNode->previous << " (NULL)" << endl;
-doublyNode * secondNode = new doublyNode; //this is the process of creating a new doubly node after a commit, then we can assign this into the doubly list from the access of the starter node
+// cout << "A new repository has been created." << endl;
+// cout << "---Current commit number: " << testGit.starterNode->commitNumber << endl;
+// cout << "---Current path of singly linked list attached to StarterNode: " << testGit.starterNode->head << " (NULL)"<< endl;
+// cout << "---StarterNode's next node: " << testGit.starterNode->next << " (NULL)" << endl;
+// cout << "---StarterNode's previous node: " << testGit.starterNode->previous << " (NULL)" << endl;
+//doublyNode * secondNode = new doublyNode; //this is the process of creating a new doubly node after a commit, then we can assign this into the doubly list from the access of the starter node
 
 /* ---------- Below is everything involved with our menu, above is initializing our new repository ---------- */
 
@@ -139,13 +142,13 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
               cout << endl;
               cout << "filename is new. Adding to the SLL..." << endl;
               testGit.addFile(fileName);
-                
             }
             //Below prints the singly linked list after a node is added
                 if (testGit.starterNode->head != NULL){
                   singlyNode * theCoutTraverser = testGit.starterNode->head;
                   cout << endl;
-                  cout << "SLL --> ";
+                  cout << "Commit Number: " << testGit.starterNode->commitNumber << endl;
+                  cout << " SLL --> ";
                     while (theCoutTraverser != nullptr){
                       cout << theCoutTraverser->fileName << " --> ";
                       theCoutTraverser = theCoutTraverser->next;
@@ -194,7 +197,8 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
                if (testGit.starterNode->head != NULL){
                   singlyNode * theCoutTraverser = testGit.starterNode->head;
                   cout << endl;
-                  cout << "SLL --> ";
+                  cout << "Commit Number: " << testGit.starterNode->commitNumber << endl;
+                  cout << " SLL --> ";
                     while (theCoutTraverser != nullptr){
                       cout << theCoutTraverser->fileName << " --> ";
                       theCoutTraverser = theCoutTraverser->next;
@@ -211,6 +215,21 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
 
       // committing changes
       case 3: {
+
+        singlyNode * traverser;
+        traverser = testGit.starterNode->head;
+        while (traverser != nullptr){
+          string sourceFile = traverser->fileName;
+          string openfile = ".minigit/" + traverser->fileVersion;
+          if (fs::exists(openfile)){
+            cout << "found file: " << traverser->fileVersion << " in minigit" << endl;
+          }
+          else{
+            cout << "File: " << traverser->fileVersion << " does not exist in minigit. Adding..." << endl;
+            
+          }
+          traverser = traverser->next;
+        }
        // traverse the entire SLL
              // 1. check if file version already exists in minigit 
                   // a. No -> copy file from current directory into minigit, new file name should be from node's fileVersion member
@@ -221,6 +240,7 @@ doublyNode * secondNode = new doublyNode; //this is the process of creating a ne
                    // copy of SLL moved to DLL node
                    // commit number of DLL node increment by 1
        // declare any necessary functions
+        cout << endl;
         break;
       }
 
