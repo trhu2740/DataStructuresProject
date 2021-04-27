@@ -28,6 +28,7 @@ using namespace std;
         traverser = starterNode->head;
 
         temp->fileName = filename;
+        temp->integerFileVersion = 00;
 
         string newFile = filename; //newFile being copied to minigit
                 //Removes the ".txt" at the end of the newFile being created
@@ -37,7 +38,8 @@ using namespace std;
                 newFile.erase(newFile.end()-1);
 
                 //Add version number to newFile
-                newFile = newFile + "_00.txt"; //should always start as version zero i think
+                newFile = newFile + "_" + to_string(temp->integerFileVersion) + ".txt";
+                //newFile = newFile + "_00.txt"; //should always start as version zero i think
                 cout <<"file version (to be copied to minigit) ------ " << newFile << endl;
 
         temp->fileVersion = newFile; //need to increment this though just testing (will be changed)
@@ -124,9 +126,9 @@ using namespace std;
             ifstream currDirect;
             ifstream minigitDirect;
             currDirect.open(sourceFile);
-            //currDirectoryFile << currDirect.rdbuf();
             minigitDirect.open(openfile);
-            //minigitDirectoryFile << minigitDirect.rdbuf();
+
+            //create strings for comparssion - these strings will be composed of the entirety of the file
             string currDirectoryFile((istreambuf_iterator<char>(currDirect)), istreambuf_iterator<char>()); //reads in the file to the string
             string minigitDirectoryFile((istreambuf_iterator<char>(minigitDirect)), istreambuf_iterator<char>()); //reads in the file to the string
 
@@ -135,7 +137,47 @@ using namespace std;
                 cout << "Files match. Keeping file version and doing nothing." << endl;
             }
             else{ //copy a new file over and increment file version
+                /*
+                    the .erase function will remove the last element of the string. We do this six times for file versions
+                    less than 10 (there are 6 chars in, for example, '_6.txt', and there will be 7 for two-digit file verisons).
+                */
                 cout << "Files do not match. Copying new file and incrementing file version." << endl;
+                ifstream currDirectory2;
+                ofstream theNewFile;
+                traverser->integerFileVersion = traverser->integerFileVersion + 1;
+                openfile.erase(openfile.end()-1);
+                openfile.erase(openfile.end()-1);
+                openfile.erase(openfile.end()-1);
+                openfile.erase(openfile.end()-1);
+                openfile.erase(openfile.end()-1);
+                openfile.erase(openfile.end()-1);
+                if (traverser->integerFileVersion > 10){
+                    openfile.erase(openfile.end()-1);
+                }
+                openfile = openfile + "_" + to_string(traverser->integerFileVersion) + ".txt";
+                currDirectory2.open(sourceFile);
+                theNewFile.open(openfile);
+
+                theNewFile << currDirectory2.rdbuf(); //read in contents to new file (incremented file version)
+
+                //code to increment the file version stored at that node
+                string newTraverserVersion = traverser->fileVersion;
+                newTraverserVersion.erase(newTraverserVersion.end()-1);
+                newTraverserVersion.erase(newTraverserVersion.end()-1);
+                newTraverserVersion.erase(newTraverserVersion.end()-1);
+                newTraverserVersion.erase(newTraverserVersion.end()-1);
+                newTraverserVersion.erase(newTraverserVersion.end()-1);
+                newTraverserVersion.erase(newTraverserVersion.end()-1);
+                if (traverser->integerFileVersion > 10){
+                    openfile.erase(openfile.end()-1);
+                }
+                newTraverserVersion = newTraverserVersion + "_" + to_string(traverser->integerFileVersion) + ".txt";
+                traverser->fileVersion = newTraverserVersion; //update the current file version to incremented file version
+
+                //close all streams
+                currDirect.close();
+                minigitDirect.close();
+                currDirectory2.close();
 
             }
 
@@ -156,22 +198,24 @@ using namespace std;
         }//end of while loop
         cout << "----------Commit Completed.----------" << endl;
     }
-    void Git::checkOut(int commitNumber){
-        // conditionals for matching commit number can go in the main and then declare the function (maybe)
-        Node* temp = *reference;
-   	 int position = 0;
-    // Traverse the DLL
-    while (temp->commitNumber != x && temp->next != NULL) {
-        // Update position and overwrite file?       
-        position++;
-        // Update temp
-        temp = temp->next;
-    }
-    // If the commitNumber is not present in the doubly linked list
-    if (temp->commitNumber != x)
-        return -1;
- 
-    // If the commitNumber is present in the doubly linked list, and overwrite file (not sure what to do)
-    return (position + 1);
+    void Git::checkOut(int commit){
+        // // conditionals for matching commit number can go in the main and then declare the function (maybe)
+        //     //Node* temp = *reference;
+        //     int position = 0;
+        //     // Traverse the DLL
+        //     while (temp->commitNumber != x && temp->next != NULL) {
+        //         // Update position and overwrite file?       
+        //         position++;
+        //         // Update temp
+        //         temp = temp->next;
+        //     }
+        //     // If the commitNumber is not present in the doubly linked list
+        //     if (temp->commitNumber != x)
+        //         return -1;
 
+        //     // If the commitNumber is present in the doubly linked list, and overwrite file (not sure what to do)
+        //     return (position + 1);
+
+        //         // search through DLL for matching commit number 
+                
     }

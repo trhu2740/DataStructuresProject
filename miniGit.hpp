@@ -18,6 +18,7 @@ struct singlyNode
 {
   std::string fileName; //local file
   std::string fileVersion; //name of file in .minigit folder
+  int integerFileVersion;
   singlyNode * next;
 };
 
