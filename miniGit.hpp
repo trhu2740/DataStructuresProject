@@ -35,7 +35,7 @@ class Git
     void addFile(string filename);
     void removeFile(string filename);
     void commitChanges();
-    void checkOut();
+    void checkOut(int commitNumber);
     doublyNode * starterNode; //this is our access to the starterNode, I'm not sure if this needs to be changed but seems to work in the driver
   
   private: 

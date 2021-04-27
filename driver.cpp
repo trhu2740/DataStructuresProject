@@ -75,6 +75,7 @@ else{ //create anyways or quit program..?
 
 /* ---------- Below is everything involved with our menu, above is initializing our new repository ---------- */
 
+doublyNode * head = testGit.starterNode;
  int option = 0;
   // declare strings as needed
   while(option != 5) {
@@ -215,31 +216,74 @@ else{ //create anyways or quit program..?
 
       // committing changes
       case 3: {
+        
+        //cout << "step debug one - pre commitchanges" << endl;
+        testGit.commitChanges();
+        //cout << "step debug two - post commitchanges" << endl;
 
-        singlyNode * traverser;
-        traverser = testGit.starterNode->head;
-        while (traverser != nullptr){
-          string sourceFile = traverser->fileName;
-          string openfile = ".minigit/" + traverser->fileVersion;
-          if (fs::exists(openfile)){
-            cout << "found file: " << traverser->fileVersion << " in minigit" << endl;
+
+        /*
+        //then create new doubly node
+        doublyNode * additionalNode = new doublyNode;
+        doublyNode * traverser;
+        doublyNode * prev;
+        singlyNode * singlyTraverser;
+        singlyTraverser = testGit.starterNode->head;
+        prev = head;
+        traverser = head;
+
+        int newCommitNumber = 0;
+
+
+        while (traverser != NULL){
+          traverser = traverser->next;
+          newCommitNumber +=1;
+        }
+        while (prev->next != NULL){
+          prev = prev->next;
+        }
+        prev->next = additionalNode;
+        additionalNode->commitNumber = newCommitNumber;
+        additionalNode->previous = prev;
+        cout << "The new commit number: " << newCommitNumber << endl;
+
+        singlyNode * newDoublyNodeTraverser;
+        newDoublyNodeTraverser = additionalNode->head;
+          singlyNode * temp = new singlyNode;
+          temp->fileName = singlyTraverser->fileName;
+          temp->fileVersion = singlyTraverser->fileVersion;
+          if (additionalNode->head == nullptr){
+            additionalNode->head = temp;
           }
           else{
-            cout << "File: " << traverser->fileVersion << " does not exist in minigit. Adding..." << endl;
-            
+            while (singlyTraverser->next != nullptr){
+            singlyTraverser = singlyTraverser->next;
+            }
+            singlyTraverser->next = temp;
           }
-          traverser = traverser->next;
-        }
-       // traverse the entire SLL
-             // 1. check if file version already exists in minigit 
-                  // a. No -> copy file from current directory into minigit, new file name should be from node's fileVersion member
-                  // b. Yes -> check if current directory file has been changed
-                       // i. if file is unchanged, do nothing
-                       // ii. if file is changed, copy file from current directory to minigit and assign name with version number, update SLL node name to version number
-             // 2. create new DLL node of repo
-                   // copy of SLL moved to DLL node
-                   // commit number of DLL node increment by 1
-       // declare any necessary functions
+          testGit.starterNode = additionalNode;
+          //Below prints the singly linked list of the new doubly node after being copied
+                if (testGit.starterNode->head != NULL){
+                  singlyNode * theCoutTraverser = testGit.starterNode->head;
+                  cout << endl;
+                  cout << "Commit Number: " << testGit.starterNode->commitNumber << endl;
+                  cout << " SLL --> ";
+                    while (theCoutTraverser != nullptr){
+                      cout << theCoutTraverser->fileName << " --> ";
+                      theCoutTraverser = theCoutTraverser->next;
+                    }
+                    cout << "NULL";
+                    cout << endl;
+                }
+                else{
+                  cout << "singly linked list head is still NULL" << endl;
+                }
+
+
+
+
+        
+        */
         cout << endl;
         break;
       }
