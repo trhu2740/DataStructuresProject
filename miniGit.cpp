@@ -157,5 +157,21 @@ using namespace std;
         cout << "----------Commit Completed.----------" << endl;
     }
     void Git::checkOut(int commitNumber){
+        // conditionals for matching commit number can go in the main and then declare the function (maybe)
+        Node* temp = *reference;
+   	 int position = 0;
+    // Traverse the DLL
+    while (temp->commitNumber != x && temp->next != NULL) {
+        // Update position and overwrite file?       
+        position++;
+        // Update temp
+        temp = temp->next;
+    }
+    // If the commitNumber is not present in the doubly linked list
+    if (temp->commitNumber != x)
+        return -1;
+ 
+    // If the commitNumber is present in the doubly linked list, and overwrite file (not sure what to do)
+    return (position + 1);
 
     }
