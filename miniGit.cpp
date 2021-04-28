@@ -36,7 +36,7 @@ using namespace std;
                 newFile.erase(newFile.end()-1);
                 newFile.erase(newFile.end()-1);
                 newFile.erase(newFile.end()-1);
-
+                //.txt
                 //Add version number to newFile
                 newFile = newFile + "_" + to_string(temp->integerFileVersion) + ".txt";
                 //newFile = newFile + "_00.txt"; //should always start as version zero i think
@@ -144,7 +144,8 @@ using namespace std;
                 cout << "Files do not match. Copying new file and incrementing file version." << endl;
                 ifstream currDirectory2;
                 ofstream theNewFile;
-                traverser->integerFileVersion = traverser->integerFileVersion + 1;
+                traverser->integerFileVersion = traverser->integerFileVersion + 1; //__0, __1, __2 etc
+                // _0.txt
                 openfile.erase(openfile.end()-1);
                 openfile.erase(openfile.end()-1);
                 openfile.erase(openfile.end()-1);
@@ -154,6 +155,7 @@ using namespace std;
                 if (traverser->integerFileVersion > 10){
                     openfile.erase(openfile.end()-1);
                 }
+                //add to the end of the string
                 openfile = openfile + "_" + to_string(traverser->integerFileVersion) + ".txt";
                 currDirectory2.open(sourceFile);
                 theNewFile.open(openfile);
@@ -180,7 +182,6 @@ using namespace std;
                 currDirectory2.close();
 
             }
-
           }
           else{
             cout << "File: " << traverser->fileVersion << " does not exist in minigit. Adding..." << endl;
@@ -196,26 +197,84 @@ using namespace std;
           }
           traverser = traverser->next;
         }//end of while loop
+
+
+        //create new doubly node && copy list
+        doublyNode * newNode = new doublyNode; //creates the new doubly node
+        newNode->previous = starterNode; //sets previous to starterNode
+        newNode->next = NULL; //sets next doubly to NULL (this is the newest commit)
+        newNode->commitNumber = starterNode->commitNumber+1; //Increment from previous commit
+        newNode->head = nullptr;
+        starterNode->next = newNode; //set next pointer from starterNode to newNode
+        starterNode = starterNode->next; //finally set starterNode to the newNode (so we are on the new doublyNode/new commit)
+        
+        cout << "New Commit Number -> " << starterNode->commitNumber << endl;
+        cout << "Copying previous SLL to new doubly node... ((((Performing a deep copy))))" << endl;
+        //All there is to do now is copy the SLL over from the previous commit to the new commit
+        singlyNode * prevDoubly;
+        prevDoubly = starterNode->previous->head;
+        singlyNode * currDoubly;
+        currDoubly = starterNode->head;
+
+        while (prevDoubly != nullptr){
+            singlyNode * temp = new singlyNode;
+            temp->fileName = prevDoubly->fileName;
+            temp->fileVersion = prevDoubly->fileVersion;
+            temp->integerFileVersion = prevDoubly->integerFileVersion;
+
+            if (starterNode->head == nullptr){
+                cout << "New doubly Node Head -> nullptr" << endl;
+                starterNode->head = temp;
+                temp->next = nullptr;
+            }
+            else{
+                while (currDoubly->next != nullptr){
+                    currDoubly = currDoubly->next;
+                }
+                cout << "-----Added Node to new Doubly node-----" << endl;
+                currDoubly->next = temp;
+                temp->next = nullptr;
+            }
+
+            currDoubly = starterNode->head;
+            prevDoubly = prevDoubly->next;
+        }
+
         cout << "----------Commit Completed.----------" << endl;
     }
     void Git::checkOut(int commit){
-        // // conditionals for matching commit number can go in the main and then declare the function (maybe)
-        //     //Node* temp = *reference;
-        //     int position = 0;
-        //     // Traverse the DLL
-        //     while (temp->commitNumber != x && temp->next != NULL) {
-        //         // Update position and overwrite file?       
-        //         position++;
-        //         // Update temp
-        //         temp = temp->next;
-        //     }
-        //     // If the commitNumber is not present in the doubly linked list
-        //     if (temp->commitNumber != x)
-        //         return -1;
+        doublyNode * traverser;
+        traverser = starterNode;
+        cout << "Traversing doubly linked list to find user requested checkout number... " << endl;
 
-        //     // If the commitNumber is present in the doubly linked list, and overwrite file (not sure what to do)
-        //     return (position + 1);
+        while (traverser->commitNumber != commit){ //if the current commit number isn't the one we need -- 
+            if (commit < traverser->commitNumber){ //we will go the previous if the commit number we need is less than current
+                traverser =traverser->previous;
+            }
+            else{ //or we will go higher if the requested commit number is higher than the current commit number 
+                traverser = traverser->next;
+            } 
+        }//end of while loop
+        //create our singlyTraverser to traverse the files in the requested commit
+        singlyNode * singlyTraverser;
+        singlyTraverser = traverser->head;
+        while (singlyTraverser != nullptr){
+            ifstream in;
+            string openfile = ".minigit/" + singlyTraverser->fileVersion;
 
-        //         // search through DLL for matching commit number 
-                
+            in.open(openfile);
+            ofstream out (singlyTraverser->fileName); 
+            //out.open(singlyTraverser->fileName);
+            
+            //string updateToCome((istreambuf_iterator<char>(in)), istreambuf_iterator<char>()); //reads in the file to the string
+            out << in.rdbuf();
+
+
+            in.close();
+            out.close();
+
+            singlyTraverser = singlyTraverser->next;
+        }
+        cout << "----------Checkout Completed. Local Directories have been Updated----------" << endl;
+        cout << endl;
     }

@@ -28,7 +28,6 @@ namespace fs = std::filesystem;
 */ 
 
 /*
-
   Terminal Process for adding to gitHub:
 
     1) Check git status using git status
@@ -42,6 +41,7 @@ namespace fs = std::filesystem;
 void menu();
 
 int main(){
+int newCommitNumber = 0;
 //fs::remove_all(".minigit"); // removes a directory and its contents
 Git testGit; //test git 
 //doublyNode starterNode;
@@ -221,6 +221,50 @@ doublyNode * head = testGit.starterNode;
         testGit.commitChanges();
         //cout << "step debug two - post commitchanges" << endl;
 
+        /*
+        //creating new doubly node
+        doublyNode * additionalNode = new doublyNode;
+        newCommitNumber = newCommitNumber +1;
+        additionalNode->commitNumber = newCommitNumber;
+        testGit.starterNode->next = additionalNode;
+        additionalNode->previous = testGit.starterNode;
+        singlyNode * traverserStarterNode = testGit.starterNode->head;
+        singlyNode * traverserAdditionalNode = testGit.starterNode->next->head;
+        cout << "StarterNode->next commit number ==== " << testGit.starterNode->next->commitNumber << endl;
+
+        //cout << "debug step one" << endl;
+        cout << endl;
+        //copy all contents of SLL
+        while (traverserStarterNode != nullptr){
+          if (traverserAdditionalNode == nullptr){
+            cout << "new doubly node head is NULL" << endl;
+            singlyNode * deepCopy = new singlyNode;
+            //set values of deepCopy node
+            deepCopy->fileName = traverserStarterNode->fileName;
+            deepCopy->fileVersion = traverserStarterNode->fileVersion;
+            deepCopy->integerFileVersion = traverserStarterNode->integerFileVersion;
+            deepCopy->next = nullptr;
+
+            testGit.starterNode->next->head = deepCopy;
+            //cout << "debug step two" << endl;
+            cout << endl;
+          }
+          else{
+            cout << "new doubly node head NOT null" << endl;
+            singlyNode * deepCopy = new singlyNode;
+            //set values of deepCopy node
+            deepCopy->fileName = traverserStarterNode->fileName;
+            deepCopy->fileVersion = traverserStarterNode->fileVersion;
+            deepCopy->integerFileVersion = traverserStarterNode->integerFileVersion;
+            deepCopy->next = nullptr;
+
+            traverserAdditionalNode->next = deepCopy;
+          }
+          traverserAdditionalNode = traverserAdditionalNode->next;
+          traverserStarterNode = traverserStarterNode->next;
+        }
+        testGit.starterNode = testGit.starterNode->next;
+        */
 
         /*
         //then create new doubly node
@@ -278,12 +322,26 @@ doublyNode * head = testGit.starterNode;
                 else{
                   cout << "singly linked list head is still NULL" << endl;
                 }
-
-
-
-
         
         */
+                 //Below prints the singly linked list of the new doubly node after being copied
+                if (testGit.starterNode->head != NULL){
+                  singlyNode * theCoutTraverser = testGit.starterNode->head;
+                  cout << endl;
+                  cout << "Commit Number: " << testGit.starterNode->commitNumber << endl;
+                  cout << " SLL --> ";
+                    while (theCoutTraverser != nullptr){
+                      cout << theCoutTraverser->fileName << " --> ";
+                      theCoutTraverser = theCoutTraverser->next;
+                    }
+                    cout << "NULL";
+                    cout << endl;
+                }
+                else{
+                  cout << "singly linked list head is still NULL" << endl;
+                }
+        newCommitNumber = newCommitNumber +1;
+        cout << "New Doubly Node created." << endl;
         cout << endl;
         break;
       }
@@ -293,16 +351,20 @@ doublyNode * head = testGit.starterNode;
        int commitNumber;
        cout << "Enter a commit number: " << endl;
        cin >> commitNumber;
+       if (commitNumber > newCommitNumber){
+         cout << "Invalid commit number" << endl;
+         break;
+       }
        // if commit number = valid, then files should be overwritten by corresponding files in minigit
             char yesNo;
             cout << "Warning: You will lose your local changes if you check out from a different version before making a commit with your current local changes." << endl;
             cout << "Do you still want to do this? (Y/N)" << endl;
              cin >> yesNo;
-            if(yesNo == 'Y') {
-              // declare any necessary functions
-             // search DLL for a node with matching commit number
+            if(yesNo == 'Y' || yesNo == 'y') {
+                testGit.checkOut(commitNumber);
              break;
             } else {
+              cout << "Returning to menu -- user declined the warning." << endl;
              // DON'T PERFORM FUNCTION
              break;
             }

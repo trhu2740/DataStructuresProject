@@ -27,5 +27,17 @@ in its entirety, and will do the follwing.
             - If no -> Copy a new file over with an incremented file version
             - If yes -> Do nothing (files match)
     - Then creates a new doubly linked list node (a new commit number/node)
+        - Once the new doubly node has been created, we set the starterNode (head of doubly LL)->next to the new doublyNode and
+        perform a deep copy of the previous singly linked list to the new doubly node singly linked list.
+
+Option 4 allows the user to checkout a previous version of files within the commit's respective singly linked list. In doing so,
+if the user inputs a valid commit number, we will traverse to the respective doubly node that corresponds to that commit.
+    - We will then traverse the singly linked list at that respective doubly node
+        - Copy the respective fileVersion data to the current working diretory (this overwrites the current working directory files)
+
+Option 5 will quit the program, and upon quitting the program will close the minigit directory including all files inside.
+
+Notes:
+    Input verification has not been added (Please be careful about all of your inputs)
     
 
