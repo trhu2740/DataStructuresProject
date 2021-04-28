@@ -8,7 +8,7 @@ into your terminal to compile the minigit. (This can be run using a basic ./a.ou
 
     g++ -std=c++17 driver.cpp miniGit.cpp
 
-Upon startup, you will be prompted to initialize a new repository. To answer this, just input a simply 'y' or 'n' (caps not required) 
+Upon startup, you will be prompted to initialize a new repository. To answer this, just input a simply 'y' or 'n' (caps/no caps accepted) 
 and press enter. Due to the fact this is a 'trivial' question to the user, an answer of no will also initialize a new repository.
 
 You wll then be prompted with a menu that will continuously run until the number 5 has been inputted by the user. Option 1 allows
@@ -38,6 +38,12 @@ if the user inputs a valid commit number, we will traverse to the respective dou
 Option 5 will quit the program, and upon quitting the program will close the minigit directory including all files inside.
 
 Notes:
-    Input verification has not been added (Please be careful about all of your inputs)
+    - Input verification has not been added (Please be careful about all of your inputs)
+    - If for some reason you get a segFault/Bus Error:
+        - Run the program again, press Y at the beginning (to create the directory), and then press option 5. This will remove the
+        directory.
+    - There is a good amount of commented out code - this is all code that did not make the final version. I left it in to show a little
+        bit of the process in the code.
+
     
 
